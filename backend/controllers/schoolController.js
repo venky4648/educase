@@ -49,3 +49,16 @@ export const listOfSchools = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// get all schools without distance
+export const getAllSchools = async (req, res) => {
+  try {
+    const schools = await Schools.findAll();
+    if (schools.length === 0) {
+      return res.status(404).json({ message: "No schools found" });
+    }
+    res.status(200).json(schools,{ message: "Schools retrieved successfully" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

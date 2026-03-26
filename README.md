@@ -56,9 +56,10 @@ npm start
 ## API Endpoints
 
 | Method | Endpoint           | Description     | Body                                                           |
-| ------ | ------------------ | --------------- | -------------------------------------------------------------- |
-| POST   | `/api/school/add`  | Add new school  | `{ "name": "", "address": "", "latitude": 0, "longitude": 0 }` |
-| GET    | `/api/school/list` | Get all schools | -                                                              |
+| ------ | ------------------ | -------------------------- `| -------------------------------------------------------------- |
+| POST   | `/api/school/add`  | Add new school             `| `{ "name": "", "address": "", "latitude": 0, "longitude": 0 }` |
+| GET    | `/api/school/list` | Get all schools`by distance | `latitude,longitude `
+|GET     |`/api/school/all `  | Get All schools     =       |- 
 
 ## School Model
 
