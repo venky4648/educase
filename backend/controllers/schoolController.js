@@ -1,4 +1,4 @@
-import School from "../models/SchoolModel.js";
+import Schools from "../models/SchoolModel.js";
 import getDistance from "../utills/distance.js";
 // Add School
 export const addSchool = async (req, res) => {
@@ -9,7 +9,7 @@ export const addSchool = async (req, res) => {
       return res.status(400).json({ message: "All fields required" });
     }
 
-    const school = await School.create({
+    const school = await Schools.create({
       name,
       address,
       latitude,
@@ -27,7 +27,7 @@ export const listOfSchools = async (req, res) => {
   try {
     const { latitude, longitude } = req.query;
 
-    const schools = await School.findAll();
+    const schools = await Schools.findAll();
 
     const userLat = parseFloat(latitude);
     const userLon = parseFloat(longitude);

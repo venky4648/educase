@@ -1,65 +1,88 @@
-# EduCase
+# EduCase - School Management Backend API
 
-EduCase is a Node.js backend project (Express + MySQL) for building an education-focused application.
+EduCase is a Node.js/Express backend API for managing schools in an education platform.  
+Key features: Add schools (name, address, GPS coordinates), list all schools, distance calculations.
 
-## Project Status
+## Status
 
-This repository is currently in early setup stage.  
-At the moment, only the backend package configuration is present in `backend/`.
+Development stage: Backend API with Sequelize/MySQL integration.
 
 ## Tech Stack
 
-- Node.js
-- Express
-- MySQL (`mysql2`)
-- Authentication support with `bcrypt`
-- Environment configuration with `dotenv`
+- **Runtime**: Node.js, Express.js
+- **Database**: MySQL (mysql2, Sequelize ORM)
+- **Utilities**: dotenv, cors, body-parser, bcrypt, nodemon
+- **API**: RESTful endpoints for school CRUD
 
 ## Project Structure
 
 ```text
 educase/
-  README.md
-  backend/
-    package.json
-    package-lock.json
-    node_modules/
+├── README.md
+└── backend/
+    ├── package.json
+    ├── server.js (Express app)
+    ├── config/
+    │   └── db.js (Sequelize config)
+    ├── controllers/
+    │   └── schoolController.js
+    ├── models/
+    │   └── SchoolModel.js
+    ├── routes/
+    │   └── schoolRoutes.js
+    └── utills/
+        └── distance.js (Haversine formula)
 ```
 
 ## Getting Started
 
-### 1) Open the backend folder
+### Prerequisites
+
+- Node.js (LTS)
+- MySQL server running
+- Create `.env` in `backend/` with: `PORT=5000`, `DB_HOST=localhost`, `DB_USER=youruser`, `DB_PASS=yourpass`, `DB_NAME=educase`
+
+### Setup
 
 ```bash
 cd backend
-```
-
-### 2) Install dependencies
-
-```bash
 npm install
-```
-
-### 3) Run the backend
-
-```bash
+npx sequelize-cli db:migrate  # If models/migrations added
 npm start
 ```
 
-Current start script:
+**Start script**: `nodemon server.js` (dev server on port 5000 or env PORT)
 
-- `npm start` -> runs `nodemon index.js`
+## API Endpoints
+
+| Method | Endpoint           | Description     | Body                                                           |
+| ------ | ------------------ | --------------- | -------------------------------------------------------------- |
+| POST   | `/api/school/add`  | Add new school  | `{ "name": "", "address": "", "latitude": 0, "longitude": 0 }` |
+| GET    | `/api/school/list` | Get all schools | -                                                              |
+
+## School Model
+
+```js
+{
+  id: INTEGER (PK, auto),
+  name: STRING (req),
+  address: STRING (req),
+  latitude: FLOAT (req),
+  longitude: FLOAT (req)
+}
+```
 
 ## Notes
 
-- Ensure you have Node.js installed (LTS recommended).
-- You will need to add `backend/index.js` (or update the start script) to run the server successfully.
-- Add a `.env` file in `backend/` for database and app configuration.
+- Typo fixes needed: `server.js` ('expresss' → 'express'), `package.json` ('body-parse' → 'body-parser').
+- Uses Haversine distance util (not yet integrated in controllers).
 
 ## Next Steps
 
-- Create `backend/index.js` and initialize Express app
-- Set up MySQL connection
-- Add API routes (auth, users, courses, etc.)
-- Add error handling and input validation
-
+- Fix noted typos (server.js, package.json).
+- Add auth (JWT/bcrypt login/register).
+- Expand models/routes (users, courses).
+- Frontend integration (React/Vue).
+- Deploy (Vercel/Heroku, RDS).
+- Tests (Jest/Supertest).
+- Distance filtering in list endpoint.
